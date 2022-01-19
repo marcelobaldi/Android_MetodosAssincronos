@@ -11,10 +11,10 @@ import marcelobaldi.callbackbase01.model.ClienteModel;
 
 public class ClienteApi {
     //Atributos
-    private String  email = "";                                                 // ""
-    private Boolean existe = Boolean.FALSE;                                     // ""
-    private ClienteModel clienteModel = new ClienteModel();                     // ""
-    private List<ClienteModel> listaClientes = new ArrayList<ClienteModel>();              // ""
+    private String  email;
+    private Boolean existe;
+    private ClienteModel clienteModel = new ClienteModel();
+    private List<ClienteModel> listaClientes = new ArrayList<ClienteModel>();
     private ClienteApiCallback clienteApiCallback;                              //Classe API
 
     //Construtor (Conter a Lista Estática)
@@ -64,6 +64,10 @@ public class ClienteApi {
         }.execute();
     }
     public void buscarPorEmail(String emailV) {
+        email  = "";
+        existe = Boolean.FALSE;
+
+
         new AsyncTask<String, Integer, Boolean>() {
             @Override protected Boolean doInBackground(String... strings) {
                 email = emailV.toLowerCase();
@@ -83,6 +87,8 @@ public class ClienteApi {
         }.execute();
     }
     public void salvar(ClienteModel clienteV) {
+        existe = Boolean.FALSE;
+
         new AsyncTask<ClienteModel, Integer, Integer>(){
             @Override protected Integer doInBackground(ClienteModel... clienteModels) {
                 //Verificar Se Já Existe - Manual
